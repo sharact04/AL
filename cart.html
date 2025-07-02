@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panier - Droguerie AL AHRAM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: linear-gradient(to right, #f3e7e9, #e3eeff);
+      color: #333;
+      margin: 0;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      background-color: #ecf0f1;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .logo {
+      max-width: 150px;
+      height: auto;
+      margin-right: 20px;
+    }
+    .title {
+      color: #2c3e50;
+      font-size: 24px;
+      margin: 0;
+    }
+    .nav-bar {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .nav-bar a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      margin: 0 10px;
+    }
+    .nav-bar a:hover {
+      background-color: #ecf0f1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    button {
+      padding: 8px 12px;
+      margin: 2px;
+      border: none;
+      border-radius: 4px;
+      background-color: #2ecc71;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #27ae60;
+    }
+    .delete-btn {
+      background-color: #e74c3c;
+    }
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+    .edit-btn {
+      background-color: #f39c12;
+    }
+    .edit-btn:hover {
+      background-color: #e67e22;
+    }
+    .action-bar {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .payment-method {
+      margin: 20px 0;
+      text-align: center;
+    }
+    /* Invoice-specific styles */
+    #invoice {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    #invoice .logo {
+      max-width: 100px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    #invoice .company-info {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    #invoice .company-info h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #2c3e50;
+    }
+    #invoice .company-info p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+    #invoice .invoice-title {
+      text-align: center;
+      font-size: 18px;
+      margin: 20px 0;
+      color: #2c3e50;
+    }
+    #invoice .client-info {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    #invoice table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    #invoice th, #invoice td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+      word-wrap: break-word;
+      max-width: 0;
+    }
+    #invoice th {
+      background-color: #f0f0f0;
+      color: #000;
+    }
+    #invoice .total-row {
+      font-weight: bold;
+      font-size: 16px;
+      text-align: right;
+      margin-top: 10px;
+    }
+    #invoice .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+    /* Print-specific styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #invoice, #invoice * {
+        visibility: visible;
+      }
+      #invoice {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20mm;
+        box-shadow: none;
+        background: white;
+      }
+      #invoice table {
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+      }
+      #invoice h1 {
+        font-size: 24px;
+      }
+      #invoice .invoice-title {
+        font-size: 18px;
+      }
+      #invoice p {
+        font-size: 14px;
+      }
+      #invoice th, #invoice td {
+        font-size: 12px;
+        padding: 5px;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="logo.png" alt="Droguerie AL AHRAM Logo" class="logo">
+    <h1 class="title">Panier - Droguerie AL AHRAM</h1>
+  </div>
+
+  <div class="nav-bar">
+    <a href="stock.html">Retour au Stock</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Produit</th>
+        <th>Prix Unitaire (DH)</th>
+        <th>Quantité</th>
+        <th>Total (DH)</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableCart"></tbody>
+  </table>
+
+  <p style="text-align: center; margin-top: 10px;">Total: <span id="cartTotal">0.00</span> DH</p>
+
+  <div class="action-bar">
+    <button id="clearCartButton">Vider le Panier</button>
+    <button id="checkoutButton">Finaliser la Commande</button>
+  </div>
+
+  <div class="payment-method">
+    <label><input type="radio" name="paymentMethod" value="cash" checked> Espèces (Cash)</label>
+    <label><input type="radio" name="paymentMethod" value="tpe"> TPE (Carte)</label>
+  </div>
+
+  <!-- Invoice container (hidden until generated) -->
+  <div id="invoice" style="display: none;">
+    <table style="width: 100%; border: none;">
+      <tr>
+        <td style="border: none; vertical-align: top; width: 50%;">
+          <img src="logo.png" alt="Droguerie AL AHRAM Logo" class="logo">
+          <div class="company-info">
+            <h1>Droguerie AL AHRAM</h1>
+            <p>Adresse : Meknès</p>
+          </div>
+        </td>
+        <td style="border: none; vertical-align: top; width: 50%;"></td>
+      </tr>
+    </table>
+    <div class="invoice-title">Facture N°<span id="invoiceNumber">000000001</span> du <span id="invoiceDate"></span></div>
+    <div class="client-info">Client : <span id="clientName"></span></div>
+    <table>
+      <thead>
+        <tr>
+          <th>Article</th>
+          <th>Qté</th>
+          <th>PU (DH)</th>
+          <th>Total (DH)</th>
+        </tr>
+      </thead>
+      <tbody id="invoiceItems"></tbody>
+    </table>
+    <div class="total-row">Total : <span id="invoiceTotal"></span> DH</div>
+    <div class="payment-info">Méthode de Paiement: <span id="paymentMethodDisplay"></span></div>
+    <div class="footer">
+      <p>Droguerie AL AHRAM</p>
+      <p>Adresse : Meknès</p>
+      <p>Siret/RC : (facultatif)</p>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Droguerie AL AHRAM</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: linear-gradient(to right, #f3e7e9, #e3eeff);
+      color: #333;
+      margin: 0;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      background-color: #ecf0f1;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .logo {
+      max-width: 150px;
+      height: auto;
+      margin-right: 20px;
+    }
+    .title {
+      color: #2c3e50;
+      font-size: 24px;
+      margin: 0;
+    }
+    .nav-bar {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .nav-bar a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      margin: 0 10px;
+    }
+    .nav-bar a:hover {
+      background-color: #ecf0f1;
+    }
+    .cart-icon {
+      position: relative;
+      display: inline-block;
+    }
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    input[type='text'], input[type='number'] {
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type="number"] {
+      width: 80px;
+      padding: 6px 10px;
+      background-color: #f9f9f9;
+      border: 2px solid #3498db;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 14px;
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type="number"]:focus {
+      border-color: #2980b9;
+      box-shadow: 0 2px 6px rgba(41, 128, 185, 0.3);
+      outline: none;
+    }
+    input[type="number"]:hover {
+      border-color: #2980b9;
+    }
+    button {
+      padding: 8px 12px;
+      margin: 2px;
+      border: none;
+      border-radius: 4px;
+      background-color: #2ecc71;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #27ae60;
+    }
+    .delete-btn {
+      background-color: #e74c3c;
+    }
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+    .form-container {
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .prix-input {
+      width: 70px;
+    }
+    .search-bar {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+    }
+    #searchInput {
+      width: 300px;
+    }
+    .action-bar {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .action-bar button {
+      background-color: #f39c12;
+    }
+    .action-bar button:hover {
+      background-color: #e67e22;
+    }
+    .secondary-buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="logo.png" alt="Al Ahram Paint Meknes Logo" class="logo">
+    <h1 class="title">Droguerie AL AHRAM </h1>
+  </div>
+
+  <div class="nav-bar">
+    <a href="cart.html" class="cart-icon">
+      Panier
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+
+  <div class="form-container">
+    <input type="text" id="nomProduit" placeholder="Nom du produit">
+    <input type="number" id="prixProduit" placeholder="Prix (DH)" step="0.01" class="prix-input">
+    <input type="number" id="quantiteProduit" placeholder="Quantité" min="1">
+    <button id="addButton">Ajouter</button>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Serial No.</th>
+        <th>Produit</th>
+        <th>Prix (DH)</th>
+        <th>Quantité</th>
+        <th>Actions</th>
+        <th>Panier</th>
+      </tr>
+    </thead>
+    <tbody id="tableStock"></tbody>
+  </table>
+
+  <div class="secondary-buttons">
+    <button onclick="saveDatabase()">Save Database</button>
+    <button onclick="exportDatabase()">Export Database</button>
+  </div>
+
+  <script src="stock.js"></script>
+</body>
+</html>
